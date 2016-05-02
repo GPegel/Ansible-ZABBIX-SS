@@ -1,0 +1,5 @@
+---
+# Repo: zabbix-database
+# File: meta/main.yml
+dependencies:
+  - { role: zabbix-repo }

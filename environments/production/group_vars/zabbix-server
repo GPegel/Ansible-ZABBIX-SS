@@ -1,0 +1,9 @@
+---
+# Repo: none (top_level)
+# File: group_vars/zabbix-servers
+
+# Zabbix Instance name
+zabbix_server_name: "Lacent Production"
+
+# Override the zabbix server ip for the zabbix server
+zabbix_server_ip: localhost

@@ -1,0 +1,11 @@
+---
+- hosts: all
+  roles:
+    - apache
+    - common
+    - firewall
+    - zabbix-agent
+    - zabbix-database
+    - zabbix-server
+    - zabbix-web
+    - zabbix-java-gateway
