@@ -1,2 +1,21 @@
 ---
 # vars file for zabbix-database
+# A list that has all the databases to be
+# created and their replication status:
+mysql_db:
+  - name: zabbix
+    replicate: no
+
+mysql_slow_log: /var/log/mysqld-slow.log
+
+# A list of the mysql users to be created
+# and their password and privileges:
+mysql_users:
+  - name: zabbix
+    host: localhost
+    pass: zabbix123
+    priv: "zabbix.*:ALL"
+  - name: zabbix
+    host: "%"
+    pass: zabbix123
+    priv: "zabbix.*:ALL"

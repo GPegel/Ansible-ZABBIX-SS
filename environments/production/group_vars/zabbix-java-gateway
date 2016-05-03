@@ -1,4 +1,0 @@
----
-# JMX password
-zabbix_jmx_password: "zabbixjmx123"
-ibm_jdk_dir: "/usr/share/ibm-java"

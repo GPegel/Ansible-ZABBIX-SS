@@ -1,6 +1,17 @@
 ---
-# Zabbix version
-zabbix_version: "3.0"
-
 # NTP server
 ntp: 172.29.81.104
+
+# Zabbix
+zabbix_version: "3.0"
+zabbix_database_path: "/var/lib/mysql"
+zabbix_db_name: "zabbix"
+zabbix_db_user: "zabbix"
+zabbix_db_password: "zabbix123"
+zabbix_db_web_user: "zabbix-web"
+zabbix_db_web_password: "zabbixweb123"
+zabbix_server_name: "Zabbix Test"
+zabbix_server_ip: localhost
+zabbix_jmx_password: "zabbixjmx123"
+ibm_jdk_dir: "/usr/share/ibm-java"
+zabbix_db_host: localhost

@@ -72,13 +72,7 @@ PidFile=/var/run/zabbix/zabbix_server.pid
 # Default:
 # DBHost=localhost
 
-DBHost={% if ZabbixServer is defined%}
-{{ ZabbixServer }}
-{% elif ansible_default_ipv4.address == hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] %}
-localhost
-{% else %}
-{{ hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] }}
-{% endif %}
+DBHost={{ zabbix_db_host }}
 
 ### Option: DBName
 #	Database name.

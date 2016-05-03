@@ -26,7 +26,7 @@
     - zabbix-database
 
 - name: be sure the zabbix database data path exists
-  file: path=/tmp state=directory owner=mysql
+  file: path={{ zabbix_database_path }} state=directory owner=mysql
         group=mysql mode=0755
   tags:
     - zabbix
@@ -66,9 +66,9 @@
     - zabbix
     - zabbix-database
 
-- name: allow access from the zabbix_server_frontend address
+- name: allow access from the ZabbixServer address
   mysql_user: name={{ zabbix_db_user }} password={{ zabbix_db_password }}
-    priv={{ zabbix_db_name }}.*:ALL state=present host={{ zabbix_server_frontend }}
+    priv={{ zabbix_db_name }}.*:ALL state=present host={{ ZabbixServer }}
   when: zabbix_server_frontend is defined
   tags:
     - zabbix
@@ -76,15 +76,15 @@
 
 - name: allow one zabbix-server remote access if it's not running on the same host
   mysql_user: name={{ zabbix_db_user }} password={{ zabbix_db_password }}
-    priv={{ zabbix_db_name }}.*:ALL state=present host={{ hostvars[groups['zabbix_server_backends'][0]]['ansible_enp0s8']['ipv4']['address'] }}
-  when: ("{{ hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] }}" != "{{ ansible_default_ipv4.address }}") and (zabbix_server_frontend is not defined)
+    priv={{ zabbix_db_name }}.*:ALL state=present host={{ hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] }}
+  when: ("{{ hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] }}" != "{{ ansible_default_ipv4.address }}") and (ZabbixServer is not defined)
   tags:
     - zabbix
     - zabbix-database
 
 - name: allow the zabbix web server group access to the database
   mysql_user: name={{ zabbix_db_web_user }} password={{ zabbix_db_web_password }}
-    priv={{ zabbix_db_name }}.*:ALL state=present host={{ hostvars[groups['zabbix_web_servers'][0]]['ansible_enp0s8']['ipv4']['address'] }}
+    priv={{ zabbix_db_name }}.*:ALL state=present host={{ hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] }}
   tags:
     - zabbix
     - zabbix-database
@@ -106,7 +106,7 @@
     - zabbix-database
 
 - name: load the mysql schemas
-  shell: zcat /usr/share/doc/zabbix-server-mysql-3.0.1/{{ item }} | mysql -u root {{ zabbix_db_name }}
+  shell: zcat /usr/share/doc/zabbix-server-mysql-3.0.2/{{ item }} | mysql -u root {{ zabbix_db_name }}
   with_items:
     - create.sql.gz
   when: databases.rc != 0
