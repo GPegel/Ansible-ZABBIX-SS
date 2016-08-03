@@ -1,7 +1,7 @@
 # Ansible-ZABBIX-SS!
 Ansible Playbook for creating a Zabbix Server on a Single Server
 
-Zabbix Version used = 3.0.2
+Zabbix Version used = 3.0.3
 
 Tested on CentOS 7
 
