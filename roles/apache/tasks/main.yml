@@ -3,6 +3,7 @@
 # Role: apache
 # File tasks/main.yml
 - name: install Apache
+  become: true
   yum:
     name: "httpd"
     state: present
@@ -10,6 +11,7 @@
     - httpd
 
 - name: install Apache SSL Module
+  become: true
   yum:
     name: "mod_ssl*"
     state: present
@@ -17,9 +19,10 @@
     - httpd
 
 - name: be sure HTTPD is running and enabled
+  become: true
   service:
     name: httpd
-    state: running
+    state: started
     enabled: yes
   tags:
     - httpd

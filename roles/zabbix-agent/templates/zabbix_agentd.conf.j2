@@ -86,10 +86,10 @@ DebugLevel=3
 
 Server={% if ZabbixServer is defined %}
 {{ ZabbixServer }}
-{% elif ansible_default_ipv4.address == hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] %}
+{% elif ansible_default_ipv4.address == hostvars[groups['ZabbixServer'][0]]['ansible_eth0']['ipv4']['address'] %}
 localhost
 {% else %}
-{{ hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] }}
+{{ hostvars[groups['ZabbixServer'][0]]['ansible_eth0']['ipv4']['address'] }}
 {% endif %}
 
 
@@ -134,10 +134,10 @@ localhost
 
 ServerActive={% if ZabbixServer is defined %}
 {{ ZabbixServer }}
-{% elif ansible_default_ipv4.address == hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] %}
+{% elif ansible_default_ipv4.address == hostvars[groups['ZabbixServer'][0]]['ansible_eth0']['ipv4']['address'] %}
 localhost
 {% else %}
-{{ hostvars[groups['ZabbixServer'][0]]['ansible_enp0s8']['ipv4']['address'] }}
+{{ hostvars[groups['ZabbixServer'][0]]['ansible_eth0']['ipv4']['address'] }}
 {% endif %}
 
 ### Option: Hostname

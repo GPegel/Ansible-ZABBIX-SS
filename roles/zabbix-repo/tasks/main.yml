@@ -3,6 +3,7 @@
 # File: tasks/main.yml
 
 - name: check if zabbix-repo is installed
+  become: true
   command: rpm -q zabbix-release
   register: zbx_installed
   changed_when: 0
@@ -12,6 +13,7 @@
     - repo
 
 - name: install the Zabbix repository package
+  become: true
   yum:
     name: "{{ zabbix_repo_url }}"
     state: present
@@ -21,6 +23,7 @@
     - repo
 
 - name: import the Zabbix GPG key
+  become: true
   rpm_key:
     key: "{{ zabbix_repo_gpg_key_url }}"
     state: present

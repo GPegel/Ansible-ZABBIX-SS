@@ -2,6 +2,7 @@
 # role: zabbix-server
 # file: tasks/main.yml
 - name: be sure zabbix-server is installed
+  become: true
   yum:
     name: "zabbix-server-mysql"
     state: present
@@ -10,6 +11,7 @@
     - zabbix-server
 
 - name: be sure trousers package is up to date
+  become: true
   yum:
     name: "trousers"
     state: latest
@@ -18,6 +20,7 @@
     - zabbix-server
 
 - name: be sure the php-ldap package is installed
+  become: true
   yum:
     name: "php-ldap"
     state: present
@@ -26,6 +29,7 @@
     - zabbix-server
 
 - name: be sure zabbix-server is configured
+  become: true
   template: src="zabbix_server.conf.j2" dest=/etc/zabbix/zabbix_server.conf
     owner="root" group="zabbix" mode=0640
   notify:
@@ -35,9 +39,10 @@
     - zabbix-server
 
 - name: be sure zabbix-server is running and enabled
+  become: true
   service:
     name: zabbix-server
-    state: running
+    state: started
     enabled: yes
   tags:
     - zabbix

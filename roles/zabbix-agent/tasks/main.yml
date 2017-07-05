@@ -3,6 +3,7 @@
 # File tasks/main.yml
 
 - name: be sure libselinux-python are installed
+  become: true
   yum:
     name: "libselinux-python"
     state: present
@@ -11,6 +12,7 @@
     - zabbix-agent
 
 - name: install the Zabbix agent
+  become: true
   yum:
     name: "zabbix-agent"
     state: present
@@ -19,6 +21,7 @@
     - zabbix-agent
 
 - name: place custom userparameter files
+  become: true
   copy: src={{ item }} dest=/etc/zabbix/zabbix_agentd.d/ owner=root mode=0755
   with_fileglob:
     - zabbix_userparameters/*
@@ -29,6 +32,7 @@
     - zabbix-agent
 
 - name: be sure zabbix agent scripts directory is present
+  become: true
   file: path=/etc/zabbix/scripts state=directory owner=zabbix
       group=zabbix mode=0755
   tags:
@@ -36,6 +40,7 @@
     - zabbix-agent
 
 - name: place the custom zabbix agent scripts
+  become: true
   copy: src={{ item }} dest=/etc/zabbix/scripts/ owner=root mode=0755
   with_fileglob:
     - zabbix_scripts/*
@@ -44,6 +49,7 @@
     - zabbix-agent
 
 - name: configure the Zabbix agent
+  become: true
   template: src="zabbix_agentd.conf.j2" dest=/etc/zabbix/zabbix_agentd.conf
     owner="root" group="root" mode=0644
   notify:
@@ -53,9 +59,10 @@
     - zabbix-agent
 
 - name: be sure zabbix-agent is running and enabled
+  become: true
   service:
     name: zabbix-agent
-    state: running
+    state: started
     enabled: yes
   tags:
     - zabbix

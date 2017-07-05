@@ -3,7 +3,7 @@
 ntp: 172.29.81.104
 
 # Zabbix
-zabbix_version: "3.0"
+zabbix_version: "3.2"
 zabbix_database_path: "/var/lib/mysql"
 zabbix_db_name: "zabbix"
 zabbix_db_user: "zabbix"
