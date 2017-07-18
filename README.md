@@ -15,3 +15,4 @@ In case of failing Zabbix Agent to start, please run:
 ```
 setsebool -P httpd_can_network_connect=1
 ```
+Test
